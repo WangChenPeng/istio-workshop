@@ -16,21 +16,9 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 5. Initialize the Container Service plug-in and point the endpoint to us-east.   
    `bx cs region-set us-east`
 
-6. Install the Kubernetes CLI. Click the link corresponding to your operating system:
+6. Install the Kubernetes CLI. 
 
-* Windows: https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/windows/amd64/kubectl.exe. Install the Kubernetes CLI in the same directory as the IBM Cloud CLI. This setup saves you some filepath changes when you run commands later.
-    
-* OS X: https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/darwin/amd64/kubectl
-* Linux: https://storage.googleapis.com/kubernetes-release/release/v1.7.4/bin/linux/amd64/kubectl. If you are using OSX or Linux, complete the following steps.
-
-    1. Move the executable file to the `/usr/local/bin` directory with `mv /<path_to_file>/kubectl /usr/local/bin/kubectl`.
-
-    2. Make sure that `/usr/local/bin` is listed in your PATH system variable.
-       ```
-       echo $PATH
-       /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-       ```
-    3. Convert the binary file to an executable with `chmod +x /usr/local/bin/kubectl`.
+Go to the [Kubernetes page](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-via-curl) to install the CLI and follow the steps.
 
 
 ### Access your cluster
