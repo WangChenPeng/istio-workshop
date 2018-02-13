@@ -16,9 +16,7 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 5. Initialize the Container Service plug-in and point the endpoint to us-east.   
    `bx cs region-set us-east`
 
-6. Install the Kubernetes CLI. 
-
-Go to the [Kubernetes page](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-via-curl) to install the CLI and follow the steps.
+6. Install the Kubernetes CLI. Go to the [Kubernetes page](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-via-curl) to install the CLI and follow the steps.
 
 
 ### Access your cluster
