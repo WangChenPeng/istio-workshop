@@ -122,5 +122,9 @@ route:
     ```
     Hello sdsdffsd from helloworld-service-v1-4086392344-42q21 with 1.0
     ```
+4. Clean up the rule.
 
+    ```sh
+    istioctl delete -f guestbook/route-rule-force-hello-v1.yaml
+    ```
 #### [Continue to Exercise 10 - Fault injection and rate limiting](../exercise-10/README.md)
