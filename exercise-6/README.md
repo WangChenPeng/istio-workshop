@@ -50,7 +50,7 @@ Note that the services must be started in a fixed order because they depend on o
     cd ../istio-workshop
     kubectl apply -f <(istioctl kube-inject -f guestbook/mysql-deployment.yaml) -f guestbook/mysql-service.yaml
     kubectl apply -f <(istioctl kube-inject -f guestbook/redis-deployment.yaml) -f guestbook/redis-service.yaml
-    kubectl apply -f <(istioctl kube-inject -f guestbook/helloworld-deployment.yaml) -f guestbook/helloworld-service.yaml
+    kubectl apply -f <(istioctl kube-inject -f guestbook/helloworld-deployment.yaml --debug) -f guestbook/helloworld-service.yaml
     kubectl apply -f <(istioctl kube-inject -f guestbook/helloworld-deployment-v2.yaml)
     ```
 
