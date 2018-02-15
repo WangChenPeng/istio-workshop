@@ -46,9 +46,9 @@ Before modifying any of the routes, a default route must be set to just `v1` of 
     {"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},"
     ```
 3. Clean up
-```sh
-istioctl delete -f guestbook/route-rule-force-hello-v1.yaml
-```
+    ```sh
+    istioctl delete -f guestbook/route-rule-force-hello-v1.yaml
+    ```
 
 ### Canary Deployments
 
