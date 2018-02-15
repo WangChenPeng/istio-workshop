@@ -40,7 +40,7 @@ kubectl get secret -n istio-system
 ```sh
 NAME                                        TYPE                                  DATA      AGE
 ...
-indexistio                                  Opaque                                2         23s
+guestbook-242887                                  Opaque                                2         23s
 ...
 ```
 ### Deploy the Front Door Ingress
@@ -48,7 +48,7 @@ In our workshop, we are using `us-ease` region. If you have a cluster from anoth
 
 Change the template file to add secret name and cluster name(most likely the same). Then create the Ingress.
 ```sh
-cat guestbook/frontdoor-ingress.yaml| sed 's/xxxx/${cluster_name}/g' | sed 's/ssss/${secret_name}/g' | kubectl -n istio-system create -f -
+cat guestbook/frontdoor-ingress.yaml| sed 's/xxxx/${secret_name}/g' | sed 's/ssss/${secret_name}/g' | kubectl -n istio-system create -f -
 ```
 To examine the Ingress, run
 ```sh
