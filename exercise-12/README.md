@@ -25,7 +25,7 @@ bluemix-default-secret                 kubernetes.io/dockercfg               1  
 bluemix-default-secret-international   kubernetes.io/dockercfg               1         4d
 bluemix-default-secret-regional        kubernetes.io/dockercfg               1         4d
 default-token-r2bv7                    kubernetes.io/service-account-token   3         4d
-indexistio                             Opaque                                2         4d
+guestbook-242887                             Opaque                                2         4d
 istio.default                          istio.io/key-and-cert                 3         2d
 ```
 Pick the secret name showing `Opaque` in `Type`.
@@ -67,21 +67,21 @@ metadata:
   uid: 84c68584-0872-11e8-a6d2-660c238dff98
 spec:
   rules:
-  - host: indexistio.us-south.containers.mybluemix.net
+  - host: guestbook-242887.us-east.containers.mybluemix.net
     http:
       paths:
       - backend:
           serviceName: istio-ingress
           servicePort: 80
         path: /
-  - host: zipkin.indexistio.us-south.containers.mybluemix.net
+  - host: zipkin.guestbook-242887.us-east.containers.mybluemix.net
     http:
       paths:
       - backend:
           serviceName: zipkin
           servicePort: 9411
         path: /
-  - host: grafana.indexistio.us-south.containers.mybluemix.net
+  - host: grafana.guestbook-242887.us-east.containers.mybluemix.net
     http:
       paths:
       - backend:
@@ -90,7 +90,7 @@ spec:
         path: /
   tls:
   - hosts:
-    - indexistio.us-south.containers.mybluemix.net
+    - guestbook-242887.us-east.containers.mybluemix.net
     secretName: indexistio
 status:
   loadBalancer: {}
@@ -103,8 +103,8 @@ backend:
    servicePort: 80
 ```
 Which corresponds to the `guestbook-ui` in istio ingress.   
-Now let's access the guestbook service. Try `http://[clustername].us-east.containers.mybluemix.net` and you'll see the guestbook gui.   
-And go on with `http://zipkin.[clustername].us-east.containers.mybluemix.net` and `http://grafana.[clustername].us-east.containers.mybluemix.net` to access the zipkin and grafana services.  
+Now let's access the guestbook service. Try `http://[secretname].us-east.containers.mybluemix.net` and you'll see the guestbook gui.   
+And go on with `http://zipkin.[secretname].us-east.containers.mybluemix.net` and `http://grafana.[secretname].us-east.containers.mybluemix.net` to access the zipkin and grafana services.  
 
 Congratulations! You have finished the lab. If you want to find out more about Istio, try out more advanced features, or follow more examples and guides, you can find all this and more at https://istio.io/docs/.
 
