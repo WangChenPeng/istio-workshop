@@ -122,11 +122,5 @@ route:
     ```
     Hello sdsdffsd from helloworld-service-v1-4086392344-42q21 with 1.0
     ```
-### Clean up the rules.
 
-    ```sh
-    istioctl delete -f guestbook/route-rule-force-hello-v1.yaml
-    istioctl delete -f guestbook/route-rule-canary.yaml.yaml
-    istioctl delete -f guestbook/route-rule-user-agent-chrome.yaml (Only if you applied the rule)
-    ```    
 #### [Continue to Exercise 10 - Service Isolation](../exercise-10/README.md)
