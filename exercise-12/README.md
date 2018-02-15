@@ -46,7 +46,7 @@ guestbook-242887                                  Opaque                        
 ### Deploy the Front Door Ingress
 In our workshop, we are using `us-ease` region. If you have a cluster from another region, please modify the `guestbook/frontdoor-ingress.yaml` accordingly.
 
-Change the template file to add secret name and cluster name(most likely the same). Then create the Ingress.
+Change the template file with the secret name. Then create the Ingress.
 ```sh
 cat guestbook/frontdoor-ingress.yaml| sed 's/xxxx/${secret_name}/g' | sed 's/ssss/${secret_name}/g' | kubectl -n istio-system create -f -
 ```
