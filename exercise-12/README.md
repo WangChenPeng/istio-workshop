@@ -31,7 +31,7 @@ istio.default                          istio.io/key-and-cert                 3  
 Pick the secret name showing `Opaque` in `Type`.
 Now copy:
 ```sh
-kubectl get secret [secret_name] -o yaml | sed 's/default/istio-system/g' | kubectl -n istio-system create -f -
+kubectl get secret [secret] -o yaml | sed 's/default/istio-system/g' | kubectl -n istio-system create -f -
 ```
 To verify the secret being copied:
 ```sh
@@ -46,7 +46,7 @@ guestbook-242887                            Opaque                              
 ### Deploy the Front Door Ingress
 In our workshop, we are using `us-ease` region. If you have a cluster from another region, please modify the `guestbook/frontdoor-ingress.yaml` accordingly.
 
-Let's check the IBM Ingress and subdomain information.
+Let's check the IBM Ingress secret and subdomain information.
 ```sh
 bx cs cluster-get guestbook
 
@@ -57,7 +57,7 @@ Ingress secret:		guestbook-242887
 For this cluster, the subdomain name and secret name are the same `guestbook-242887`. But that is not always the case.
 Change the template file with the secret name and subdomain name. Then create the Ingress.
 ```sh
-cat guestbook/frontdoor-ingress.yaml| sed 's/xxxx/${secret_name}/g' | sed 's/ssss/${subdomain}/g' | kubectl -n istio-system create -f -
+cat guestbook/frontdoor-ingress.yaml| sed 's/xxxx/${secret}/g' | sed 's/ssss/${subdomain}/g' | kubectl -n istio-system create -f -
 ```
 To examine the Ingress, run
 ```sh
