@@ -25,7 +25,7 @@ bluemix-default-secret                 kubernetes.io/dockercfg               1  
 bluemix-default-secret-international   kubernetes.io/dockercfg               1         4d
 bluemix-default-secret-regional        kubernetes.io/dockercfg               1         4d
 default-token-r2bv7                    kubernetes.io/service-account-token   3         4d
-guestbook-242887                             Opaque                                2         4d
+guestbook-242887                       Opaque                                2         4d
 istio.default                          istio.io/key-and-cert                 3         2d
 ```
 Pick the secret name showing `Opaque` in `Type`.
@@ -40,15 +40,24 @@ kubectl get secret -n istio-system
 ```sh
 NAME                                        TYPE                                  DATA      AGE
 ...
-guestbook-242887                                  Opaque                                2         23s
+guestbook-242887                            Opaque                                2         23s
 ...
 ```
 ### Deploy the Front Door Ingress
 In our workshop, we are using `us-ease` region. If you have a cluster from another region, please modify the `guestbook/frontdoor-ingress.yaml` accordingly.
 
-Change the template file with the secret name. Then create the Ingress.
+Let's check the IBM Ingress and subdomain information.
 ```sh
-cat guestbook/frontdoor-ingress.yaml| sed 's/xxxx/${secret_name}/g' | sed 's/ssss/${secret_name}/g' | kubectl -n istio-system create -f -
+bx cs cluster-get guestbook
+
+...
+Ingress subdomain:	guestbook-242887.us-east.containers.mybluemix.net
+Ingress secret:		guestbook-242887
+```
+For this cluster, the subdomain name and secret name are the same `guestbook-242887`. But that is not always the case.
+Change the template file with the secret name and subdomain name. Then create the Ingress.
+```sh
+cat guestbook/frontdoor-ingress.yaml| sed 's/xxxx/${secret_name}/g' | sed 's/ssss/${subdomain}/g' | kubectl -n istio-system create -f -
 ```
 To examine the Ingress, run
 ```sh
@@ -91,7 +100,7 @@ spec:
   tls:
   - hosts:
     - guestbook-242887.us-east.containers.mybluemix.net
-    secretName: indexistio
+    secretName: guestbook-242887
 status:
   loadBalancer: {}
 ```
@@ -103,8 +112,8 @@ backend:
    servicePort: 80
 ```
 Which corresponds to the `guestbook-ui` in istio ingress.   
-Now let's access the guestbook service. Try `http://[secretname].us-east.containers.mybluemix.net` and you'll see the guestbook gui.   
-And go on with `http://zipkin.[secretname].us-east.containers.mybluemix.net` and `http://grafana.[secretname].us-east.containers.mybluemix.net` to access the zipkin and grafana services.  
+Now let's access the guestbook service. Try `http://[subdomain].us-east.containers.mybluemix.net` and you'll see the guestbook gui.   
+And go on with `http://zipkin.[subdomain].us-east.containers.mybluemix.net` and `http://grafana.[subdomain].us-east.containers.mybluemix.net` to access the zipkin and grafana services.  
 
 Congratulations! You have finished the lab. If you want to find out more about Istio, try out more advanced features, or follow more examples and guides, you can find all this and more at https://istio.io/docs/.
 
