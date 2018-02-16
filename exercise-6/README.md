@@ -50,7 +50,7 @@ Note that the services must be started in a fixed order because they depend on o
     cd ../istio-workshop
     kubectl apply -f <(istioctl kube-inject -f guestbook/mysql-deployment.yaml) -f guestbook/mysql-service.yaml
     kubectl apply -f <(istioctl kube-inject -f guestbook/redis-deployment.yaml) -f guestbook/redis-service.yaml
-    kubectl apply -f <(istioctl kube-inject -f guestbook/helloworld-deployment.yaml --debug) -f guestbook/helloworld-service.yaml
+    kubectl apply -f <(istioctl kube-inject -f guestbook/helloworld-deployment.yaml) -f guestbook/helloworld-service.yaml
     kubectl apply -f <(istioctl kube-inject -f guestbook/helloworld-deployment-v2.yaml)
     ```
 
@@ -75,7 +75,7 @@ Note that the services must be started in a fixed order because they depend on o
 5. Deploy the guestbook UI:
 
     ```sh
-    kubectl apply -f <(istioctl kube-inject -f guestbook/guestbook-ui-deployment.yaml) -f guestbook/guestbook-ui-service.yaml
+    kubectl apply -f <(istioctl kube-inject -f guestbook/guestbook-ui-deployment.yaml --debug) -f guestbook/guestbook-ui-service.yaml
     ```
 
 #### [Continue to Exercise 7 - Istio Ingress controller](../exercise-7/README.md)
