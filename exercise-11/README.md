@@ -43,18 +43,17 @@ One way to try out the mutual TLS authentication communication, is to use curl i
 
 1. get the Helloworld pod name
 ```sh
-kubectl get pods -l app=helloworld-service
+kubectl get pods -l app=guestbook-ui
 ```
 ```sh
-NAME                                     READY     STATUS    RESTARTS   AGE
-helloworld-service-v1-8684f48ccb-ntn7g   2/2       Running   0          1d
-helloworld-service-v2-8648cf8d96-n4bxr   2/2       Running   0          1d
+NAME                            READY     STATUS    RESTARTS   AGE
+guestbook-ui-596d68d88f-qxhzk   2/2       Running   1          1h
 ```
 Make sure the pod is “Running”.
 
 2. ssh into the envoy container
 ```sh
-kubectl exec -it helloworld-service-v1-xxxxxxxxxx -c istio-proxy /bin/bash
+kubectl exec -it guestbook-ui-xxxxxxxx -c istio-proxy /bin/bash
 ```
 Make sure to change the pod name into the corresponding one on your system. This command will ssh into istio-proxy container(sidecar) of the pod.
 
@@ -70,7 +69,7 @@ Note that cert-chain.pem is envoy’s cert that needs to present to the other si
 
 4. send request to the guestbook-ui service
 ```sh
-curl https://guestbook-ui:80/echo/tls -v --key /etc/certs/key.pem --cert /etc/certs/cert-chain.pem --cacert /etc/certs/root-cert.pem -k
+curl https://guestbook-service:8080 -v --key /etc/certs/key.pem --cert /etc/certs/cert-chain.pem --cacert /etc/certs/root-cert.pem -k
 ```
 From the output there will be some error message `error fetching CN from cert:The requested data were not available`. This is expected. 
 Go to the bottom and there you will see the success message.
