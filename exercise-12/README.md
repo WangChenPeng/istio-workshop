@@ -35,7 +35,7 @@ kubectl get secret [secret] -o yaml | sed 's/default/istio-system/g' | kubectl -
 ```
 To verify the secret being copied:
 ```sh
-kubectl get secret -n istio-system
+kubectl get secret -n guestbook
 ```
 ```sh
 NAME                                        TYPE                                  DATA      AGE
