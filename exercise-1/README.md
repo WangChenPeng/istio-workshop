@@ -60,7 +60,7 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 From your command line, run:
    
 ```    
-git clone https://github.com/szihai/istio-workshop/tree/indexsf
+git clone https://github.com/szihai/istio-workshop
 
 cd istio-workshop
 ```
