@@ -25,10 +25,6 @@
    ```
    cd [path_to_istio-version]
    ```
-There is a small bug for version 0.5.1 that has to be fixed.
-   ```sh
-   echo "  namespace: istio-system" >> install/kubernetes/addons/prometheus.yaml 
-   ```
    
 2. Install Istio on the Kubernetes cluster.
 
