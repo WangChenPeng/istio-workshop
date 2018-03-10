@@ -24,12 +24,12 @@ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=gr
 
 Browse to http://localhost:3000 and navigate to the Istio Dashboard.
 
-### Zipkin
-Establish port forwarding from local port 9411 to the Zipkin instance:
+### Jaeger
+Establish port forwarding from local port 16686 to the Jaeger instance:
 ```sh
 kubectl port-forward -n istio-system \
-  $(kubectl get pod -n istio-system -l app=zipkin -o jsonpath='{.items[0].metadata.name}') \
-  9411:9411
+$(kubectl get pod -n istio-system -l app=jaeger -o \
+jsonpath='{.items[0].metadata.name}') 16686:16686 &
 ```
 
 Browse to http://localhost:9411.
