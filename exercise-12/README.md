@@ -65,40 +65,35 @@ kubectl get ingress istio-fd  -o yaml -n istio-system
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  creationTimestamp: 2018-02-02T23:40:58Z
-  generation: 1
   name: istio-fd
   namespace: istio-system
-  resourceVersion: "183991"
-  selfLink: /apis/extensions/v1beta1/namespaces/istio-system/ingresses/istio-fd
-  uid: 84c68584-0872-11e8-a6d2-660c238dff98
 spec:
-  rules:
-  - host: guestbook-242887.us-east.containers.mybluemix.net
-    http:
-      paths:
-      - backend:
-          serviceName: istio-ingress
-          servicePort: 80
-        path: /
-  - host: zipkin.guestbook-242887.us-east.containers.mybluemix.net
-    http:
-      paths:
-      - backend:
-          serviceName: zipkin
-          servicePort: 9411
-        path: /
-  - host: grafana.guestbook-242887.us-east.containers.mybluemix.net
-    http:
-      paths:
-      - backend:
-          serviceName: grafana
-          servicePort: 3000
-        path: /
   tls:
   - hosts:
-    - guestbook-242887.us-east.containers.mybluemix.net
-    secretName: guestbook-242887
+    - xxxx.us-east.containers.mybluemix.net
+    secretName: ssss
+  rules:
+  - host: xxxx.us-east.containers.mybluemix.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: istio-ingress
+          servicePort: 80
+  - host: jaeger.xxxx.us-east.containers.mybluemix.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: jaeger
+          servicePort: 16686
+  - host: grafana.xxxx.us-east.containers.mybluemix.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: grafana
+          servicePort: 3000
 status:
   loadBalancer: {}
 ```
