@@ -1,23 +1,12 @@
 ## Workshop Setup
 - [Exercise 1 - Accessing a Kubernetes cluster with IBM Cloud Container Service](exercise-1/README.md)
 
-## Exploring Kubernetes (may skip)
-
-- [Exercise 2 - Deploying a microservice to Kubernetes](exercise-2/README.md)
-- [Exercise 3 - Creating a Kubernetes service](exercise-3/README.md)
-- [Exercise 4 - Scaling in and out](exercise-4/README.md)
-
 ## Creating a Service Mesh with Istio
 
-- [Exercise 5 - Installing Istio](exercise-5/README.md)
-- [Exercise 6 - Creating a service mesh with Istio Proxy](exercise-6/README.md)
-- [Exercise 7 - Istio Ingress controller](exercise-7/README.md)
-- [Exercise 8 - IBM Front Door](exercise-8/README.md)
-- [Exercise 9 - Telemetry](exercise-9/README.md)
-- [Exercise 10 - Request routing and canary deployments](exercise-10/README.md)
-- [Exercise 11 - Service Isolation](exercise-11/README.md)
-- [Exercise 12 - Security](exercise-12/README.md)
-
+- [Exercise 2 - Installing Istio](exercise-2/README.md)
+- [Exercise 3 - Creating a service mesh with Istio Proxy](exercise-3/README.md)
+- [Exercise 4 - Istio Ingress controller](exercise-4/README.md)
+- [Exercise 5 - Telemetry](exercise-5/README.md)
 
 ## Credits
 These workshop exercises are built with the help from a number of amazing Kubernetes and Istio experts from Google and Grand Cloud.
