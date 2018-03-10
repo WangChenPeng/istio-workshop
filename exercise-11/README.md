@@ -1,4 +1,4 @@
-# Exercise 10 - Service Isolation
+# Exercise 11 - Service Isolation
 
 #### Overview of Istio Mixer
 
