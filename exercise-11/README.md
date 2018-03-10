@@ -104,4 +104,4 @@ See the overview of Mixer at [istio.io](https://istio.io/docs/concepts/policy-an
     istioctl delete -f guestbook/route-rule-canary.yaml
     istioctl delete -f guestbook/route-rule-user-agent-chrome.yaml (Only if you applied the rule)
     ```    
-#### [Continue to Exercise 11 - Security](../exercise-11/README.md)
+#### [Continue to Exercise 12 - Security](../exercise-12/README.md)
