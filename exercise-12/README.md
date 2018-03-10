@@ -81,6 +81,6 @@ Go to the bottom and there you will see the success message.
 < date: Thu, 01 Feb 2018 06:12:46 GMT
 ...
 ```
-#### [Continue to Exercise 12 - Additional features](../exercise-12/README.md)
 
+Congratulations! You have finished the lab. If you want to find out more about Istio, try out more advanced features, or follow more examples and guides, you can find all this and more at https://istio.io/docs/.
 
