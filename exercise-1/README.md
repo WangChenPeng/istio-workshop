@@ -70,5 +70,5 @@ This is the working directory for the lab.
 ### Next step
 
 #### [Continue to Exercise 2 - Deploying a microservice to Kubernetes](../exercise-2/README.md)
-### OR directly going to Istio topics:
+### OR directly go into Istio topics:
 #### [Continue to Exercise 5 - Installing Istio](../exercise-5/README.md)
