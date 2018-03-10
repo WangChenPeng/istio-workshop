@@ -1,4 +1,4 @@
-# Exercise 9 - Request routing and canary deployments
+# Exercise 10 - Request routing and canary deployments
 
 Before modifying any of the routes, a default route must be set to just `v1` of the Hello World service deployment. Otherwise, the round robin between `v1` and `v2` of the service deployment will continue.
 
@@ -127,4 +127,4 @@ route:
     Hello sdsdffsd from helloworld-service-v1-4086392344-42q21 with 1.0
     ```
 
-#### [Continue to Exercise 10 - Service Isolation](../exercise-10/README.md)
+#### [Continue to Exercise 11 - Service Isolation](../exercise-10/README.md)
