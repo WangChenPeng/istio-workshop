@@ -1,4 +1,4 @@
-# Exercise 5 - Installing Istio
+# Exercise 2 - Installing Istio
 
 ### Download Istio
 
@@ -29,7 +29,7 @@
 2. Install Istio on the Kubernetes cluster.
 
    ```
-   kubectl apply -f install/kubernetes/istio-auth.yaml
+   kubectl apply -f install/kubernetes/istio.yaml
    ```
 
 ### Install Add-ons for Grafana, Prometheus and Jaeger
@@ -52,4 +52,4 @@ kubectl get pods -w --all-namespaces
 kubectl get services -w --all-namespaces
 ```
 
-#### [Continue to Exercise 6 - Creating a service mesh with Istio Proxy](../exercise-6/README.md)
+#### [Continue to Exercise 3 - Creating a service mesh with Istio Proxy](../exercise-3/README.md)
