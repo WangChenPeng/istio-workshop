@@ -1,4 +1,4 @@
-# Exercise 11 - Security
+# Exercise 12 - Security
 
 #### Overview of Istio Security
 
