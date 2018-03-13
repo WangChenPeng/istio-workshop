@@ -42,7 +42,7 @@ guestbook-242887                            Opaque                              
 ...
 ```
 ### Deploy the Front Door Ingress
-In our workshop, we are using `us-ease` region. If you have a cluster from another region, please modify the `guestbook/frontdoor-ingress.yaml` accordingly.
+In our workshop, we are using `us-east` region. If you have a cluster from another region, please modify the `guestbook/frontdoor-ingress.yaml` accordingly.
 
 Let's check the IBM Ingress secret and subdomain information.
 ```sh
