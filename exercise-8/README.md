@@ -106,6 +106,6 @@ backend:
 ```
 Which corresponds to the `guestbook-ui` in istio ingress.   
 Now let's access the guestbook service. Try `http://[subdomain].us-east.containers.mybluemix.net` and you'll see the guestbook gui.   
-And go on with `http://zipkin.[subdomain].us-east.containers.mybluemix.net` and `http://grafana.[subdomain].us-east.containers.mybluemix.net` to access the zipkin and grafana services.  
+And go on with `http://jaeger.[subdomain].us-east.containers.mybluemix.net` and `http://grafana.[subdomain].us-east.containers.mybluemix.net` to access the zipkin and grafana services.  
 
 #### [Continue to Exercise 9 - Telemetry](../exercise-9/README.md)
