@@ -70,6 +70,6 @@ This is the working directory for the lab.
 ### Next step
 directly go into Istio topics:
 #### [Continue to Exercise 5 - Installing Istio](../exercise-5/README.md)
-### OR go through the Kubenetes basics
+OR go through the Kubenetes basics
 #### [Continue to Exercise 2 - Deploying a microservice to Kubernetes](../exercise-2/README.md)
 
