@@ -94,6 +94,10 @@ Note that rules with a higher precedence number are applied first. If a preceden
 
 Note that the user-agent HTTP header is propagated in the span baggage. Check out these two classes for details on how the header is [injected](https://github.com/retroryan/istio-by-example-java/blob/master/spring-boot-example/spring-istio-support/src/main/java/com/example/istio/IstioHttpSpanInjector.java) and [extracted](https://github.com/retroryan/istio-by-example-java/blob/master/spring-boot-example/spring-istio-support/src/main/java/com/example/istio/IstioHttpSpanExtractor.java).
 
+3. Clean up
+```sh
+istioctl delete -f guestbook/route-rule-canary.yaml
+```
 ### Optional - Route based on the browser
 
 It is also possible to route based on the web browser used. For example, the following rule routes to `v2` if the browser is Chrome:
