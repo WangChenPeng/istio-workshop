@@ -131,4 +131,4 @@ route:
     Hello sdsdffsd from helloworld-service-v1-4086392344-42q21 with 1.0
     ```
 
-#### [Continue to Exercise 11 - Service Isolation](../exercise-11/README.md)
+#### [Continue to Exercise 12 - Security](../exercise-12/README.md)
