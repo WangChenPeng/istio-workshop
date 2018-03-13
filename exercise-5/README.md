@@ -32,7 +32,7 @@ $(kubectl get pod -n istio-system -l app=jaeger -o \
 jsonpath='{.items[0].metadata.name}') 16686:16686 &
 ```
 
-Browse to http://localhost:9411.
+Browse to http://localhost:16686.
 
 ### Prometheus
 Establish port forwarding from local port 9090 to the Prometheus instance:
