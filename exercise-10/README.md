@@ -130,5 +130,10 @@ route:
     ```
     Hello sdsdffsd from helloworld-service-v1-4086392344-42q21 with 1.0
     ```
+4. Clean
+
+    ```sh
+    istioctl delete -f guestbook/route-rule-user-agent-chrome.yaml
+    ```
 
 #### [Continue to Exercise 12 - Security](../exercise-12/README.md)
