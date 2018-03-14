@@ -31,7 +31,7 @@ A Kubernetes Ingress rule can be created that routes external requests through t
     Events:  <none>
     ```
 
-2. Get the node IP and port of the Istio Ingress controller.
+2. Get the Kubernetes worker public IP and the port of the Istio Ingress controller.
 
     ```sh
     kubectl get service istio-ingress -n istio-system
@@ -40,19 +40,24 @@ A Kubernetes Ingress rule can be created that routes external requests through t
     istio-ingress          10.31.244.185                    80:31920/TCP,443:32165/TCP    1h
     ```
 
-    ```sh
-    bx cs workers guestbook
-    ``` 
+Obtain the Kubernetes worker VM's public IP.  Note the `Public IP` for the worker VM.
+
+    ```bash
+    $ bx cs workers my_cluster
+    OK
+    ID                                                 Public IP         Private IP      Machine Type   State    Status   Zone    Version
+    kube-hou02-pafb5ac29a060e4bc3861d1e774503f682-w1   184.172.233.171   10.76.196.127   free           normal   Ready    hou02   1.9.3_1502
+    ```
     
 3. Export the external IP address and port from the previous command.
    
     ```sh
-    export INGRESS_IP=[node_IP]
+    export INGRESS_IP=[worker_public_IP]
     export PORT=[port]
     ```
     in the above example, the port is `31920`.
     
-4. Use the INGRESS IP and port to see the guestbook UI in a browser: `http://INGRESS_IP`. You can also access the Hello World service and see the JSON in the browser: `http://$INGRESS_IP:$PORT/hello/world`.
+4. Use the INGRESS IP and port to see the guestbook UI in a browser: `http://INGRESS_IP:$PORT`. You can also access the Hello World service and see the JSON in the browser: `http://$INGRESS_IP:$PORT/hello/world`.
 
 
 5. Curl the guestbook:
