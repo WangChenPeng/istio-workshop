@@ -31,44 +31,50 @@ A Kubernetes Ingress rule can be created that routes external requests through t
     Events:  <none>
     ```
 
-2. Get the external IP of the Istio Ingress controller.
+2. Get the node IP and port of the Istio Ingress controller.
 
     ```sh
     kubectl get service istio-ingress -n istio-system
 
     NAME                   CLUSTER-IP      EXTERNAL-IP      PORT(S)                       AGE
-    istio-ingress          10.31.244.185   169.47.103.138   80:31920/TCP,443:32165/TCP    1h
+    istio-ingress          10.31.244.185                    80:31920/TCP,443:32165/TCP    1h
     ```
 
-3. Export the external IP address from the previous command.
+    ```sh
+    bx cs workers guestbook
+    ``` 
+    
+3. Export the external IP address and port from the previous command.
    
     ```sh
-    export INGRESS_IP=[external_IP]
+    export INGRESS_IP=[node_IP]
+    export PORT=[port]
     ```
-
-4. Use the INGRESS IP to see the guestbook UI in a browser: `http://INGRESS_IP`. You can also access the Hello World service and see the JSON in the browser: `http://INGRESS_IP/hello/world`.
+    in the above example, the port is `31920`.
+    
+4. Use the INGRESS IP and port to see the guestbook UI in a browser: `http://INGRESS_IP`. You can also access the Hello World service and see the JSON in the browser: `http://$INGRESS_IP:$PORT/hello/world`.
 
 
 5. Curl the guestbook:
     ```
-    curl http://$INGRESS_IP/echo/universe
+    curl http://$INGRESS_IP:$PORT/echo/universe
     ```
 
 6. Curl the Hello World service:
     ```
-    curl http://$INGRESS_IP/hello/world
+    curl http://$INGRESS_IP:$PORT/hello/world
     ```
 
 7. Then curl the echo endpoint multiple times and notice how it round robins between v1 and v2 of the Hello World service:
 
     ```sh
-    curl http://$INGRESS_IP/echo/universe
+    curl http://$INGRESS_IP:$PORT/echo/universe
 
     {"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},
     ```
 
     ```sh
-    curl http://$INGRESS_IP/echo/universe
+    curl http://$INGRESS_IP:$PORT/echo/universe
 
     {"greeting":{"hostname":"helloworld-service-v2-1009285752-n2tpb","greeting":"Hello universe from helloworld-service-v2-1009285752-n2tpb with 2.0","version":"2.0"}
 
