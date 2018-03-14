@@ -1,16 +1,10 @@
 # Exercise 5 - Installing Istio
 
-### Download Istio
+### Install istioctl
 
-1. Either download Istio directly from https://github.com/istio/istio/releases or get the latest version using curl:
+If you are not at the `istio-workshop` directory, change to that directory.  Istio-0.6.0 should be in the istio-workshop directory.
 
-   ```
-   curl -L https://git.io/getLatestIstio | sh -
-   ```
-
-2. Extract the installation files.
-   
-3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:   
+1. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:   
    
    #### Remember to change the [version] to the current value
 
