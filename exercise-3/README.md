@@ -2,7 +2,7 @@
 
 Each pod has a unique IP address, but the address is ephemeral. The pod IP addresses are not stable and can change when pods start or restart. A service provides a single access point to a set of pods matching some constraints. A service IP address is stable.
 
-In Kubernetes, you can instruct the underlying infrastructure to create an external load balancer by specifying the service type as a LoadBalancer. If you open up [helloworldservice-service.yaml](../guestbook/helloworldservice-service.yaml), you will see that it has `type: NodePort`.
+In Kubernetes, you can instruct the underlying infrastructure to create an external load balancer by specifying the service type as a LoadBalancer. If you open up [helloworldservice-service.yaml](../guestbook/helloworld-service.yaml), you will see that it has `type: NodePort`.
 
 ### Create a Kubernetes service
 
