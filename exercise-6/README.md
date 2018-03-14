@@ -19,6 +19,7 @@ To create a service mesh with Istio, you update the deployment of the pods to ad
 The side car can be injected manually by running the istioctl kube-inject command, which modifies the YAML file before creating the deployments. This injects the Proxy into the deployment by updating the YAML to add the Proxy as a sidecar. When this command is used, the microservices are now packaged with an Proxy sidecar that manages incoming and outgoing calls for the service. To see how the deployment YAML is modified, run thw following from the `istio-workshop` dir:
 
 ```sh
+cd ..
 istioctl kube-inject -f guestbook/helloworld-deployment.yaml
 ```
 
@@ -47,7 +48,6 @@ Note that the services must be started in a fixed order because they depend on o
 1. Deploy MySQL, Redis, the Hello World microservices, and the associated Kubernetes Services from the `istio-workshop` dir:
 
     ```sh
-    cd ../istio-workshop
     kubectl apply -f <(istioctl kube-inject -f guestbook/mysql-deployment.yaml) -f guestbook/mysql-service.yaml
     kubectl apply -f <(istioctl kube-inject -f guestbook/redis-deployment.yaml) -f guestbook/redis-service.yaml
     kubectl apply -f <(istioctl kube-inject -f guestbook/helloworld-deployment.yaml) -f guestbook/helloworld-service.yaml
