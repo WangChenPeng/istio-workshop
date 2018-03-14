@@ -80,4 +80,4 @@ A Kubernetes Ingress rule can be created that routes external requests through t
 
     ```
 
-#### [Continue to Exercise 5 - Telemetry](../exercise-5/README.md)
+#### [Continue to Exercise 8 - Telemetry](../exercise-8/README.md)
