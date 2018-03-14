@@ -4,9 +4,9 @@
 If you are not familar with Kubernetes, we recommend you to follow exercise 2, 3, and 4 to learn Kubernetes.  If you are already familar with Kubernetes, feel free to proceed to exercise 5, 6, 7, and 8 to learn Istio.
 
 ## Using Kubernetes
-- [Exercise 2 - Deploying a microservice to Kubernetes] (exercise-2/README.md)
-- [Exercise 3 - Creating a Kubernetes service] (exercise-3/README.md)
-- [Exercise 4 - Scaling in and out] (exercise-4/README.md)
+- [Exercise 2 - Deploying a microservice to Kubernetes](exercise-2/README.md)
+- [Exercise 3 - Creating a Kubernetes service](exercise-3/README.md)
+- [Exercise 4 - Scaling in and out](exercise-4/README.md)
 
 ## Creating a Service Mesh with Istio
 
