@@ -1,64 +1,55 @@
-# Exercise 8 - Telemetry
+# Exercise 5 - Installing Istio
 
-First we need to configure Istio to automatically gather telemetry data for services running in the mesh.
+### Download Istio
 
-1. Create a rule to collect telemetry data.
+1. Either download Istio directly from https://github.com/istio/istio/releases or get the latest version using curl:
 
-    ```sh
-    istioctl create -f guestbook/guestbook-telemetry.yaml
-    ```
-2. Generate a small load to the application.
+   ```
+   curl -L https://git.io/getLatestIstio | sh -
+   ```
 
-    ```sh
-    while sleep 0.5; do curl http://$INGRESS_IP:$PORT/hello/world; done
-    ```
+2. Extract the installation files.
+   
+3. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:   
+   
+   #### Remember to change the [version] to the current value
 
-## View guestbook telemetry data
+   ```
+   export PATH=$PWD/istio-[version]/bin:$PATH
+   ```
 
-### Grafana
-Establish port forwarding from local port 3000 to the Grafana instance:
-```sh
-kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=grafana \
-  -o jsonpath='{.items[0].metadata.name}') 3000:3000
-```
+### Install Istio on the Kubernetes cluster
 
-Browse to http://localhost:3000 and navigate to the Istio Dashboard.
+1. Change the directory to the Istio file location.
 
-### Jaeger
-Establish port forwarding from local port 16686 to the Jaeger instance:
-```sh
-kubectl port-forward -n istio-system \
-$(kubectl get pod -n istio-system -l app=jaeger -o \
-jsonpath='{.items[0].metadata.name}') 16686:16686 &
-```
+   ```
+   cd [path_to_istio-version]
+   ```
+   
+2. Install Istio on the Kubernetes cluster.
 
-Browse to http://localhost:16686.
+   ```
+   kubectl apply -f install/kubernetes/istio.yaml
+   ```
 
-### Prometheus
-Establish port forwarding from local port 9090 to the Prometheus instance:
-```sh
-kubectl -n istio-system port-forward \
-  $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}') \
-  9090:9090
-```
-
-Browse to http://localhost:9090/graph, and in the “Expression” input box, enter: `request_count`. Click **Execute**.
-
-
-### Service Graph
-Establish port forwarding from local port 8088 to the Service Graph instance:
-```sh
-kubectl -n istio-system port-forward \
-  $(kubectl -n istio-system get pod -l app=servicegraph -o jsonpath='{.items[0].metadata.name}') \
-  8088:8088
-```
-
-Browse to http://localhost:8088/dotviz.
-
-#### Mixer Log Stream
+### Install Add-ons for Grafana, Prometheus and Jaeger
 
 ```sh
-kubectl -n istio-system logs $(kubectl -n istio-system get pods -l istio=mixer -o jsonpath='{.items[0].metadata.name}') mixer | grep \"instance\":\"newlog.logentry.istio-system\"
+kubectl apply -f install/kubernetes/addons/grafana.yaml
+kubectl apply -f install/kubernetes/addons/prometheus.yaml
+kubectl apply -f install/kubernetes/addons/servicegraph.yaml
+kubectl apply -n istio-system -f https://raw.githubusercontent.com/jaegertracing/jaeger-kubernetes/master/all-in-one/jaeger-all-in-one-template.yml
 ```
 
-Congratulations! You have finished the lab. If you want to find out more about Istio, try out more advanced features, or follow more examples and guides, you can find all this and more at https://istio.io/docs/.
+### View the Istio deployments
+
+Istio is deployed in a separate Kubernetes namespace `istio-system`  You can watch the state of Istio and other services and pods using the watch flag (`-w`) when listing Kubernetes resources. For example, in two separate terminal windows run:
+
+```sh
+kubectl get pods -w --all-namespaces
+```
+```sh
+kubectl get services -w --all-namespaces
+```
+
+#### [Continue to Exercise 3 - Creating a service mesh with Istio Proxy](../exercise-3/README.md)
