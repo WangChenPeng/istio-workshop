@@ -1,4 +1,4 @@
-## Exercise 4 - Istio Ingress controller
+## Exercise 7 - Istio Ingress controller
 
 The components deployed on the service mesh by default are not exposed outside the cluster. External access to individual services so far has been provided by creating an external load balancer on each service.
 
