@@ -7,7 +7,7 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 1. Log in to the IBM Cloud CLI with your user id and password:   
    `bx login -u {userid} -p {password}`      
 
-   If you are being promopted for update the `bx` CLI, answer `No` to skip the update.
+   When you are prompted to select an account, select `1. IBM`.  When you are promopted for update the `bx` CLI, answer `No` to skip the update.
    
 ### Access your cluster
 
