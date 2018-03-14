@@ -64,4 +64,10 @@ This is the working directory for the lab.
 
 ### Next step
 
-#### [Continue to Exercise 2 - Installing Istio](../exercise-2/README.md)
+If you are not familar with Kubernetes, we recommend you to learn Kubernetes first.
+
+#### [Continue to Exercise 2 - Deploying a microservice to Kubernetes](../exercise-2/README.md)
+
+If you are already familar with Kubernetes, feel free to proceed to exercise 5 to learn Istio.
+
+#### [Continue to Exercise 5 - Installing Istio](../exercise-5/README.md)
