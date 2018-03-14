@@ -1,4 +1,4 @@
-# Exercise 5 - Telemetry
+# Exercise 8 - Telemetry
 
 First we need to configure Istio to automatically gather telemetry data for services running in the mesh.
 
