@@ -52,4 +52,4 @@ kubectl get pods -w --all-namespaces
 kubectl get services -w --all-namespaces
 ```
 
-#### [Continue to Exercise 6 - Creating a service mesh with Istio Proxy](../exercise-3/README.md)
+#### [Continue to Exercise 6 - Creating a service mesh with Istio Proxy](../exercise-6/README.md)
