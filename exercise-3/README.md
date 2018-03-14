@@ -1,4 +1,4 @@
-# Exercise 3 - Creating a service mesh with Istio Proxy
+# Exercise 6 - Creating a service mesh with Istio Proxy
 
 ### What is a service mesh?
 
