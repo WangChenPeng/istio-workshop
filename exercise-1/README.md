@@ -4,31 +4,9 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 
 ### Install IBM Cloud Container Service command line utilities
 
-1. Install the IBM Cloud [command line interface](https://clis.ng.bluemix.net/ui/home.html).
+1. Log in to the IBM Cloud CLI with your user id and password:   
+   `bx login -u {userid} -p {password}`      
 
-2. Log in to the IBM Cloud CLI with IBM API key:   
-   `bx login -u ibmcloudxx@us.ibm.com --apikey xxxx`      
-
-3. Install the IBM Cloud Container Service plug-in with `bx plugin install container-service -r Bluemix`.
-
-4. To verify that the plug-in is installed properly, run `bx plugin list`. The Container Service plug-in is displayed in the results as `container-service`.
-
-5. Initialize the Container Service plug-in and point the endpoint to us-east.   
-   `bx cs region-set us-east`
-
-6. Install the Kubernetes CLI. 
-* Download the latest release with the command:
-```sh
-  curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.9.0/bin/linux/amd64/kubectl
-```
-* Make the kubectl binary executable.
-```sh
- chmod +x ./kubectl
- ```
-* Move the binary in to your PATH.
-```sh
- sudo mv ./kubectl /usr/local/bin/kubectl
-```
 
 ### Access your cluster
 
@@ -48,13 +26,19 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
     
     c. Copy and paste the output command from the previous step to set the `KUBECONFIG` environment variable and configure your CLI to run `kubectl` commands against your cluster.
 
-2. Create a proxy to your Kubernetes API server.
+2. Obtain your kubernetes cluster token.
+
+    ```
+    kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+    ```
+
+3. Create a proxy to your Kubernetes API server.
 
     ```
     kubectl proxy
     ```
     
-3. In a browser, go to http://localhost:8001/ui to access the API server dashboard.   
+4. In a browser, go to http://localhost:8001/ui to access the API server dashboard.   Choose the `Token` option and paste in the token obtained earlier from step 2 into the token field and click `SIGN IN`.
 
 4. View details of your cluster.
     ```
