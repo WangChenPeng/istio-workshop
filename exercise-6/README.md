@@ -78,4 +78,4 @@ Note that the services must be started in a fixed order because they depend on o
     kubectl apply -f <(istioctl kube-inject -f guestbook/guestbook-ui-deployment.yaml --debug) -f guestbook/guestbook-ui-service.yaml
     ```
 
-#### [Continue to Exercise 4 - Istio Ingress controller](../exercise-4/README.md)
+#### [Continue to Exercise 7 - Istio Ingress controller](../exercise-7/README.md)
