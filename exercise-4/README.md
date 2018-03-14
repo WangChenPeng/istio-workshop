@@ -37,7 +37,6 @@
     ```
     kubectl scale deployment helloworld-service-v1 --replicas=8
     ```
-        ```
         
 3. Verify replicates are scheduled and running.     
 
