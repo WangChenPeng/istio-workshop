@@ -40,7 +40,7 @@ A Kubernetes Ingress rule can be created that routes external requests through t
     istio-ingress          10.31.244.185                    80:31920/TCP,443:32165/TCP    1h
     ```
 
-Obtain the Kubernetes worker VM's public IP.  Note the `Public IP` for the worker VM.
+    Obtain the Kubernetes worker VM's public IP.  Note the `Public IP` for the worker VM.
 
     ```bash
     $ bx cs workers my_cluster
