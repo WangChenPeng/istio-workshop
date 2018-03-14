@@ -1,4 +1,4 @@
-# Exercise 2 - Installing Istio
+# Exercise 5 - Installing Istio
 
 ### Download Istio
 
