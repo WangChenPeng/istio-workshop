@@ -7,7 +7,8 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
 1. Log in to the IBM Cloud CLI with your user id and password:   
    `bx login -u {userid} -p {password}`      
 
-
+   If you are being promopted for update the `bx` CLI, answer `No` to skip the update.
+   
 ### Access your cluster
 
 1. Set the context for your cluster in your CLI. Every time you log in to the IBM Bluemix Container Service CLI to work with the cluster, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in IBM Cloud.
