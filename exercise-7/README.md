@@ -43,7 +43,7 @@ A Kubernetes Ingress rule can be created that routes external requests through t
     Obtain the Kubernetes worker VM's public IP.  Note the `Public IP` for the worker VM.
 
     ```bash
-    $ bx cs workers my_cluster
+    $ bx cs workers guestbook
     OK
     ID                                                 Public IP         Private IP      Machine Type   State    Status   Zone    Version
     kube-hou02-pafb5ac29a060e4bc3861d1e774503f682-w1   184.172.233.171   10.76.196.127   free           normal   Ready    hou02   1.9.3_1502
