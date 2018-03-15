@@ -4,10 +4,8 @@
 
 If you are not at the `istio-workshop` directory, change to that directory.  Istio-0.6.0 should be in the istio-workshop directory.
 
-1. Add the `istioctl` client to your PATH. Since this terminal is an emulator:  
-   
-   #### Copy the istioctl over
-
+1. Add the `istioctl` client to your PATH. Since this terminal is an emulator, to make sure it works: 
+  
    ```
    sudo cp istio-0.6.0/bin/istioctl /usr/local/bin
    ```
