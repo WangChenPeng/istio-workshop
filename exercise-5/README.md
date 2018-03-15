@@ -4,20 +4,21 @@
 
 If you are not at the `istio-workshop` directory, change to that directory.  Istio-0.6.0 should be in the istio-workshop directory.
 
-1. Add the `istioctl` client to your PATH. For example, run the following command on a MacOS or Linux system:   
+1. Add the `istioctl` client to your PATH. Since this terminal is an emulator:  
    
-   #### Remember to change the [version] to the current value
+   #### Copy the istioctl over
 
    ```
-   export PATH=$PWD/istio-[version]/bin:$PATH
+   sudo cp istio-0.6.0/bin/istioctl /usr/local/bin
    ```
-
+   When promted with `[sudo] password for student:`, enter `passw0rd`.
+   
 ### Install Istio on the Kubernetes cluster
 
 1. Change the directory to the Istio file location.
 
    ```
-   cd [path_to_istio-version]
+   cd istio-0.6.0
    ```
    
 2. Install Istio on the Kubernetes cluster.
