@@ -49,37 +49,31 @@ A Kubernetes Ingress rule can be created that routes external requests through t
     kube-hou02-pafb5ac29a060e4bc3861d1e774503f682-w1   184.172.233.171   10.76.196.127   free           normal   Ready    hou02   1.9.3_1502
     ```
     
-3. Export the external IP address and port from the previous command.
-   
-    ```sh
-    export INGRESS_IP=[worker_public_IP]
-    export PORT=[port]
-    ```
-    in the above example, the port is `31920`.
-    
-4. Use the INGRESS IP and port to see the guestbook UI in a browser: `http://INGRESS_IP:$PORT`. You can also access the Hello World service and see the JSON in the browser: `http://$INGRESS_IP:$PORT/hello/world`.
+3. Since in this lab setting, `export` command has no effect. Please remember the INGRESS_IP and PORT. In the above example, they are `184.172.233.171` and `31920`, respectively. And while doing the following steps, please remember to replace the text with your local value.
+       
+4. Use the INGRESS IP and port to see the guestbook UI in a browser: `http://{INGRESS_IP}:{PORT}`. You can also access the Hello World service and see the JSON in the browser: `http://{INGRESS_IP}:{PORT}/hello/world`.
 
 
 5. Curl the guestbook:
     ```
-    curl http://$INGRESS_IP:$PORT/echo/universe
+    curl http://{INGRESS_IP}:{PORT}/echo/universe
     ```
 
 6. Curl the Hello World service:
     ```
-    curl http://$INGRESS_IP:$PORT/hello/world
+    curl http://{INGRESS_IP}:{PORT}/hello/world
     ```
 
 7. Then curl the echo endpoint multiple times and notice how it round robins between v1 and v2 of the Hello World service:
 
     ```sh
-    curl http://$INGRESS_IP:$PORT/echo/universe
+    curl http://{INGRESS_IP}:{PORT}/echo/universe
 
     {"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},
     ```
 
     ```sh
-    curl http://$INGRESS_IP:$PORT/echo/universe
+    curl http://{INGRESS_IP}:{PORT}/echo/universe
 
     {"greeting":{"hostname":"helloworld-service-v2-1009285752-n2tpb","greeting":"Hello universe from helloworld-service-v2-1009285752-n2tpb with 2.0","version":"2.0"}
 
