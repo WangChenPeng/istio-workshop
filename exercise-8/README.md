@@ -10,7 +10,7 @@ First we need to configure Istio to automatically gather telemetry data for serv
 2. Generate a small load to the application.
 
     ```sh
-    while sleep 0.5; do curl http://$INGRESS_IP:$PORT/hello/world; done
+    while sleep 0.5; do curl http://{INGRESS_IP}:{PORT}/hello/world; done
     ```
 
 ## View guestbook telemetry data
