@@ -43,7 +43,11 @@ Your IBM Cloud paid account and your Kubernetes cluster have been pre-provisione
     kubectl proxy
     ```
     
-3. In a browser, go to http://localhost:8001/ui to access the API server dashboard.   
+3. In a browser, go to http://localhost:8001/ui to access the API server dashboard. Obtain your kubernetes cluster token.
+
+    ```
+    kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+    ```
 
 4. View details of your cluster.
     ```
