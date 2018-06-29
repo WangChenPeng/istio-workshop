@@ -29,16 +29,13 @@
 2. Install Istio on the Kubernetes cluster.
 
    ```
-   kubectl apply -f install/kubernetes/istio-auth.yaml
+   kubectl apply -f install/kubernetes/istio-demo-auth.yaml
    ```
 
 ### Install Add-ons for Grafana, Prometheus and Jaeger
 
 ```sh
 kubectl apply -f install/kubernetes/addons/grafana.yaml
-kubectl apply -f install/kubernetes/addons/prometheus.yaml
-kubectl apply -f install/kubernetes/addons/servicegraph.yaml
-kubectl apply -n istio-system -f https://raw.githubusercontent.com/jaegertracing/jaeger-kubernetes/master/all-in-one/jaeger-all-in-one-template.yml
 ```
 
 ### View the Istio deployments
