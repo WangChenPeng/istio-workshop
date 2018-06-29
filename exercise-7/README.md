@@ -34,7 +34,7 @@ A Kubernetes Ingress rule can be created that routes external requests through t
 2. Get the external IP of the Istio Ingress controller.
 
     ```sh
-    kubectl get service istio-ingress -n istio-system
+    kubectl get service istio-ingressgateway -n istio-system
 
     NAME                   CLUSTER-IP      EXTERNAL-IP      PORT(S)                       AGE
     istio-ingress          10.31.244.185   169.47.103.138   80:31920/TCP,443:32165/TCP    1h
