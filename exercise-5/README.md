@@ -32,11 +32,6 @@
    kubectl apply -f install/kubernetes/istio-demo-auth.yaml
    ```
 
-### Install Add-ons for Grafana, Prometheus and Jaeger
-
-```sh
-kubectl apply -f install/kubernetes/addons/grafana.yaml
-```
 
 ### View the Istio deployments
 
@@ -48,5 +43,14 @@ kubectl get pods -w --all-namespaces
 ```sh
 kubectl get services -w --all-namespaces
 ```
+## What just happened
+
+Congratulations! You have installed Istio into the Kubernetes cluster. A lot has been installed:
+
+- Istio Controllers and related RBAC rules
+- Istio Custom Resource Definitions 
+- Prometheus and Grafana for Monitoring
+- Jeager for Distributed Tracing
+- Istio Sidecar Injector (we'll take a look next next section)
 
 #### [Continue to Exercise 6 - Creating a service mesh with Istio Proxy](../exercise-6/README.md)
