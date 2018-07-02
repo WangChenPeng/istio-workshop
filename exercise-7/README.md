@@ -1,77 +1,90 @@
-## Exercise 7 - Istio Ingress controller
+## Exercise 7 - Istio Ingress Controller
 
 The components deployed on the service mesh by default are not exposed outside the cluster. External access to individual services so far has been provided by creating an external load balancer on each service.
 
-A Kubernetes Ingress rule can be created that routes external requests through the Istio Ingress controller to the backing services.
+Traditionally in Kubernetes, you would use an Ingress to configure a L7 proxy. However, Istio provides a much richer set of proxy configurations that are not well-defined in Kubernetes Ingress.
+Thus, in Istio, we will use Isito Gateway to define fine grained control over L7 edge proxy configuration.
 
-#### Configure Guestbook Ingress routes with the Istio Ingress controller
+#### Inspecting the Istio Ingress Gateway
 
-1. Configure the guestbook UI default route with the Istio Ingress controller.
+The ingress controller gets expossed as a normal Kubernetes service load balancer:
 
-    ```sh
-    kubectl apply -f guestbook/guestbook-ingress.yaml
-    ```
+```sh
+kubectl get svc istio-ingressgateway -n istio-system -o yaml
+```
 
-    In this file, notice that the Ingress class is specified as `kubernetes.io/ingress.class: istio`, which routes the request to Istio. Also notice that the request is routed to different services, either `helloworld-service` or `guestbook-ui`, depending on the request. You can see how this works by having Kubernetes describe the Ingress resource:
+Find the IP address of the Ingress Gateway:
 
-    ```sh
-    kubectl describe ingress
+```sh
+export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+echo $INGRESS_IP
+```
 
-    Name:             simple-ingress
-    Namespace:        default
-    Address:          
-    Default backend:  default-http-backend:80 (<none>)
-    Rules:
-      Host  Path  Backends
-      ----  ----  --------
-      *     
-            /hello/.*   helloworld-service:8080 (<none>)
-            /.*         guestbook-ui:80 (<none>)
-    Annotations:
-    Events:  <none>
-    ```
+`curl` the IP address:
 
-2. Get the external IP of the Istio Ingress controller.
+```sh
+curl http://$INGRESS_IP
+```
 
-    ```sh
-    kubectl get service istio-ingress -n istio-system
+This will return `connection refused` error. That is because there are no gateway configured to listen to any incoming connections.
 
-    NAME                   CLUSTER-IP      EXTERNAL-IP      PORT(S)                       AGE
-    istio-ingress          10.31.244.185   169.47.103.138   80:31920/TCP,443:32165/TCP    1h
-    ```
+#### Configure Guestbook Ingress
 
-3. Export the external IP address from the previous command.
-   
-    ```sh
-    export INGRESS_IP=[external_IP]
-    ```
+1 - Create a new Gateway
 
-4. Use the INGRESS IP to see the guestbook UI in a browser: `http://INGRESS_IP`. You can also access the Hello World service and see the JSON in the browser: `http://INGRESS_IP/hello/world`.
+```sh
+kubectl apply -f istio/guestbook-gateway.yaml
+```
 
+There is a `selector` block in the gateway definition. The `selector` will be used to find the actual edge proxy that should be configured to accept traffic for the gateway. This example selects pods from any namespaces that has the label of `istio` and value of `ingressgateway`.
 
-5. Curl the guestbook:
-    ```
-    curl http://$INGRESS_IP/echo/universe
-    ```
+This is similar to running:
+```sh
+kubectl get pods -l istio=ingressgateway --all-namespaces
+```
 
-6. Curl the Hello World service:
-    ```
-    curl http://$INGRESS_IP/hello/world
-    ```
+You'll find a single pod that matches this label, which is the Ingress Gateway that we looked at earlier.
+```
+NAMESPACE      NAME                                    READY     STATUS    RESTARTS   AGE
+istio-system   istio-ingressgateway-...                1/1       Running   0          7d
+```
 
-7. Then curl the echo endpoint multiple times and notice how it round robins between v1 and v2 of the Hello World service:
+After creating the Gateway, it'll enable the Istio Ingress Gateway to listen on port `80`. 
+The `hosts` block of the configuration can be used to configure virtual hosting. E.g., the same IP address can be configured to respond to different host names with different routing rules.
 
-    ```sh
-    curl http://$INGRESS_IP/echo/universe
+If you `curl` the ingress IP again:
+```sh
+curl -v http://$INGRESS_IP
+```
 
-    {"greeting":{"hostname":"helloworld-service-v1-286408581-9204h","greeting":"Hello universe from helloworld-service-v1-286408581-9204h with 1.0","version":"1.0"},
-    ```
+Rather than `connection refused`, you should see the server responded with `404 Not Found` HTTP response. This is because we have not bound any backends to this gatway yet.
 
-    ```sh
-    curl http://$INGRESS_IP/echo/universe
+2 - Create a Virtual Service
 
-    {"greeting":{"hostname":"helloworld-service-v2-1009285752-n2tpb","greeting":"Hello universe from helloworld-service-v2-1009285752-n2tpb with 2.0","version":"2.0"}
+To bind a backend to the gateway, we'll need to create a virtual service.
 
-    ```
+```sh
+kubectl apply -f istio/guestbook-ui-vs.yaml
+```
 
-#### [Continue to Exercise 8 - IBM Front Door](../exercise-8/README.md)
+A virtual service is a logical grouping of routing rules for a given target service. For ingress, we can use virtual service to bind to a gateway.
+
+This example binds the to the gateway we just created, and will respond to any hostname. Again, if you need to use virtual hosting and respond to different host names, you can specify them in the `hosts` section.
+
+3 - Connect via the Ingress Gateway
+
+Try connecting to the Ingress Gateway again.
+
+```sh
+curl http://$INGRESS_IP
+```
+
+This time you should see the HTTP response!
+
+4 - Browse to the Guestbook UI using the Ingress Gateway IP address.
+
+5 - Say Hello a few times
+
+In the browser, say hello a couple of times, and you'll see that the greeting reply will round robin between v1 and v2 versions of the hello service. This is because we have 
+
+#### [Exercise 8 - Telemetry](../exercise-8/README.md)
