@@ -56,17 +56,16 @@ Note that the services must be started in a fixed order because they depend on o
     kubectl get -w deployment
     ```
     
-When you get the pods you should see in the READY column 2/2 meaning that 2 of 2 containers are in the running state (it might take a minute or two to get to that state).
+   When you get the pods you should see in the READY column 2/2 meaning that 2 of 2 containers are in the running state (it    might take a minute or two to get to that state).
 
-When you describe the pod what that shows is the details of the additional containers.
+   When you describe the pod what that shows is the details of the additional containers.
 
-   ```
-   kubectl describe pods helloworld-service-v1.....
-   ```
+    kubectl describe pods helloworld-service-v1.....
     
 3. Verify that previous deployments are all in a state of AVAILABLE before continuing. Do not procede until they are up and running.
-    ```sh
-    kubectl get -w deployment
-    ```
+
+     ```sh
+     kubectl get -w deployment
+     ```
     
 #### [Continue to Exercise 7 - Istio Ingress controller](../exercise-7/README.md)
