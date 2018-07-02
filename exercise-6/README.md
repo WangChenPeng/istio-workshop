@@ -48,34 +48,25 @@ Note that the services must be started in a fixed order because they depend on o
 
     ```sh
     cd ../istio-workshop
-    kubectl apply -f <(istioctl kube-inject -f guestbook/mysql-deployment.yaml) -f guestbook/mysql-service.yaml
-    kubectl apply -f <(istioctl kube-inject -f guestbook/redis-deployment.yaml) -f guestbook/redis-service.yaml
-    kubectl apply -f <(istioctl kube-inject -f guestbook/helloworld-deployment.yaml) -f guestbook/helloworld-service.yaml
-    kubectl apply -f <(istioctl kube-inject -f guestbook/helloworld-deployment-v2.yaml)
+    kubectl apply -f kubernetes/
     ```
 
-2. Verify that these microservices are available before continuing. **Do not procede until they are up and running.** 
-
+2. Notice that each of the pods now has one Istio init container and two running containers. One is the main application container and the second is the istio proxy container.
     ```
     kubectl get -w deployment
     ```
     
-3. Deploy the guestbook microservice.
+When you get the pods you should see in the READY column 2/2 meaning that 2 of 2 containers are in the running state (it might take a minute or two to get to that state).
 
+When you describe the pod what that shows is the details of the additional containers.
+
+   ```
+   kubectl describe pods helloworld-service-v1.....
+   ```
+    
+3. Verify that previous deployments are all in a state of AVAILABLE before continuing. Do not procede until they are up and running.
     ```sh
-    kubectl apply -f <(istioctl kube-inject -f guestbook/guestbook-deployment.yaml) -f guestbook/guestbook-service.yaml
-    ```
-
-4. Verify that guestbook is available before continuing. **Do not procede until the microservice is up and running.** 
-
-    ```
     kubectl get -w deployment
     ```
-
-5. Deploy the guestbook UI:
-
-    ```sh
-    kubectl apply -f <(istioctl kube-inject -f guestbook/guestbook-ui-deployment.yaml --debug) -f guestbook/guestbook-ui-service.yaml
-    ```
-
+    
 #### [Continue to Exercise 7 - Istio Ingress controller](../exercise-7/README.md)
