@@ -1,107 +1,63 @@
-# Exercise 11 - Service Isolation
+# Exercise 10 - Fault Injection and Circuit Breaking
 
-#### Overview of Istio Mixer
+In this exercise we will learn how to test the resiliency of an application by injecting faults.
 
-See the overview of Mixer at [istio.io](https://istio.io/docs/concepts/policy-and-control/mixer.html).
+To test our guestbook application for resiliency, this exercise will test injecting different levels of delay when the user agent accessing the hello world service is mobile.
 
-### Service isolation using Mixer
+#### Inject a route rule to delay request
 
-1. Block access to the Hello World service.
+We can inject delays into the request.
 
-    ```sh
-    istioctl create -f guestbook/mixer-rule-denial.yaml
-    ```
+```sh
+kubectl apply -f istio/guestbook-ui-delay-vs.yaml
+```
 
-    This creates the `mixer-rule-denial.yaml` rule:
+Browse to the Guestbook UI, and you'll see that the request is responding much slower!
 
-    ```yaml
-    # Create a denier that returns a google.rpc.Code 7 (PERMISSION_DENIED)
-    apiVersion: "config.istio.io/v1alpha2"
-    kind: denier
-    metadata:
-      name: denyall
-      namespace: istio-system
-    spec:
-      status:
-        code: 7
-        message: Not allowed
-    ---
-    # The (empty) data handed to denyall at run time
-    apiVersion: "config.istio.io/v1alpha2"
-    kind: checknothing
-    metadata:
-      name: denyrequest
-      namespace: istio-system
-    spec:
-    ---
-    # The rule that uses denier to deny requests to the helloworld service
-    apiVersion: "config.istio.io/v1alpha2"
-    kind: rule
-    metadata:
-      name: deny-hello-world
-      namespace: istio-system
-    spec:
-      match: destination.service=="helloworld-service.default.svc.cluster.local"
-      actions:
-      - handler: denyall.denier
-        instances:
-        - denyrequest.checknothing
-    ```
+#### Inject error responses
 
-2. Verify that access is now denied.
-    
-    ```sh
-    curl http://$INGRESS_IP/hello/world
-    ```
+We can also inject error responses, such as returning 503 from a service.
 
-3. Clean up the rule.
-    
-    ```sh
-    istioctl delete -f guestbook/mixer-rule-denial.yaml
-    ```
+```sh
+kubectl apply -f istio/guestbook-service-503.yaml
+```
 
-### Block access to v2 of the Hello World service
- 
-1. Block access to only v2 of the Hello World service deployment.
+Visiting the Guestbook UI, and you'll see that it is now unable to retrieve any Guestbook messages. Luckily, the application has a graceful fallback to display a nice error message.
 
-    ```sh
-    istioctl create -f guestbook/mixer-rule-denial-v2.yaml
-    ```
+#### Remove the faults
 
-    This creates the `mixer-rule-denial-v2.yaml` rule:
+Remove the annoying 503 errors.
 
-    ```yaml
-    # The rule that uses denier to deny requests to version 2.0 of the helloworld service
-    apiVersion: "config.istio.io/v1alpha2"
-    kind: rule
-    metadata:
-      name: deny-hello-world
-      namespace: istio-system
-    spec:
-      match: destination.service=="helloworld-service.default.svc.cluster.local" && destination.labels["version"] == "2.0"
-      actions:
-      - handler: denyall.denier
-        instances:
-        - denyrequest.checknothing
-    ```
+```sh
+kubectl delete -f istio/guestbook-service-503.yaml
+```
 
-2. Verify that you can access the v1 service:
+Then reset the Guestbook UI virtual service so that it routes all requests to V1.
 
-    ```sh
-    curl http://$INGRESS_IP/hello/world
-    ```
+```sh
+kubectl apply -f istio/guestbook-ui-v1-vs.yaml
+```
 
-3. Verify that access to v2 is denied:
-   
-    ```sh
-    curl http://$INGRESS_IP/hello/world -A mobile
-    ```
+#### Circuit Breaking
 
-4. Clean up the rule.
+There are several circuit breaker rules you can apply in Istio:
+* Retries
+* Outlier Detection
+* Connection pooling
 
-    ```sh
-    istioctl delete -f guestbook/mixer-rule-denial-v2.yaml
-    istioctl delete -f guestbook/route-rule-canary.yaml
-    istioctl delete -f guestbook/route-rule-user-agent-chrome.yaml (Only if you applied the rule)
-    ```    
-#### [Continue to Exercise 12 - Security](../exercise-12/README.md)
+Retries can be configured in the virtual service.
+
+```sh
+kubectl apply -f istio/guestbook-service-retry-vs.yaml
+```
+
+Outlier and connection pooling are configured in the destination rule.
+
+```sh
+kubectl apply -f istio/guestbook-service-dest.yaml
+```
+
+```sh
+kubectl apply -f istio/guestbook-service-dest.yaml
+```
+#### [Continue to Exercise 11 - Security](../exercise-11/README.md)
