@@ -60,4 +60,4 @@ kubectl apply -f istio/guestbook-service-dest.yaml
 ```sh
 kubectl apply -f istio/guestbook-service-dest.yaml
 ```
-#### [Continue to Exercise 11 - Security](../exercise-11/README.md)
+#### [Continue to Exercise 11 - Service Isolation](../exercise-11/README.md)
