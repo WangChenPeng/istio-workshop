@@ -25,7 +25,7 @@ istioctl kube-inject -f guestbook/helloworld-deployment.yaml
 This adds the Istio Proxy as an additional container to the Pod and setups the necessary configuration. Inside the YAML there is now an additional container:
 
 ```
-image: docker.io/istio/proxy_debug:[version]
+image: docker.io/istio/proxy######
 imagePullPolicy: IfNotPresent
 name: istio-proxy
 ```
