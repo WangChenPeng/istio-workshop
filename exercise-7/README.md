@@ -1,6 +1,6 @@
 ## Exercise 7 - Istio Ingress Controller
 
-**NOTE: If you are using Minikube, this section may not work. Please move on.
+**NOTE: If you are using Minikube, this section may not work. Please move on.**
 
 The components deployed on the service mesh by default are not exposed outside the cluster. External access to individual services so far has been provided by creating an external load balancer on each service.
 
