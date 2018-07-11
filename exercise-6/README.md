@@ -29,6 +29,39 @@ image: docker.io/istio/proxy######
 imagePullPolicy: IfNotPresent
 name: istio-proxy
 ```
+#### Automatic sidecar injection
+
+Istio sidecars can also be automatically injected into a pod at creation time using a feature in Kubernetes called a mutating webhook admission controller.   Note that unlike manual injection, automatic injection occurs at the pod-level. You won't see any change to the deployment itself. Instead you'll want to check individual pods (via kubectl describe) to see the injected proxy.
+
+An admission controller is a piece of code that intercepts requests to the Kubernetes API server prior to persistence of the object, but after the request is authenticated and authorized. Admission controllers may be “validating”, “mutating”, or both. Mutating controllers may modify the objects they admit; validating controllers may not.
+
+The admission control process proceeds in two phases. In the first phase, mutating admission controllers are run. In the second phase, validating admission controllers are run.
+
+MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or reject and may change the object.  
+
+For Istio the webhook is the sidecar injector webhook deployment called "istio-sidecar-injector".  It will modify a pod before it is started to inject an istio init container and istio proxy container.
+
+#### Using the Sidecar Injector
+
+By default, Istio is configured to apply a sidecar injector to namespaces with the label/value of `istio-injection=enabled`.
+
+Label the default namespace with `istio-injection` label set to `enabled`.
+
+```sh
+kubectl label namespace default istio-injection=enabled
+```
+
+Check that the label is applied.
+
+```sh
+kubectl get namespace -L istio-injection
+
+NAME           STATUS    AGE       ISTIO-INJECTION
+default        Active    1h        enabled
+istio-system   Active    1h        
+kube-public    Active    1h        
+kube-system    Active    1h
+```
 
 ### Deploy Guestbook services
 
